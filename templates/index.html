@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+
+    <title>Health Insurence Cost</title>
+
+    <meta charset="UTF-8">
+
+  	<!-- media queary support -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+  	<!-- Latest compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+  	<!-- jQuery library -->
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  	<!-- Popper JS -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  	<!-- Latest compiled JavaScript -->
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+
+
+    <div class="container-fluid p-0">
+        <div class="row m-0">
+            <div class="col-xl-6 full_height" style="background-color: #73777B;">
+                <h2 class="text-center mt-3 mb-2">Health Insurence Cost</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="from-group slidecontainer">
+                        <p>Select Your Age:</p>
+                        <div class="row m-0">
+                            <div class="col-xl-9">
+                                <input type="range" class="form-control" min="1" max="100" value="50" name="age" class="slider" id="ageRange">
+                            </div>
+                            <div class='col-xl-3'>
+                                <p>Age: <span id="ageVal"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group my-2">
+                        <p>Select Your Gender:</p>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="sex" value=0 required>
+                              <label class="form-check-label">
+                                  Male
+                              </label>
+                          </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="sex" value=1>
+                              <label class="form-check-label">
+                                  Female
+                              </label>
+                          </div>
+                    </div>
+                    <div class="from-group slidecontainer">
+                        <p>Enter BMI:</p>
+                        <div class="row m-0">
+                            <div class="col-xl-9">
+                                <input type="range" class="form-control" min="1" max="50" step="0.01" value="20" name="bmi" class="slider" id="bmiRange">
+                            </div>
+                            <div class='col-xl-3'>
+                                <p>BMI: <span id="bmiVal"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="from-group slidecontainer my-4">
+                        <p>Enter Children No:</p>
+                        <div class="row m-0">
+                            <div class="col-xl-9">
+                                <input type="range" class="form-control" min="0" max="20" value="5" name="children" class="slider" id="childrenRange">
+                            </div>
+                            <div class='col-xl-3'>
+                                <p>Children: <span id="childrenVal"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group my-2">
+                        <p>Smoker or Not?</p>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="smoker" value=0 required>
+                              <label class="form-check-label">
+                                Smoker
+                              </label>
+                          </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="smoker" value=1>
+                              <label class="form-check-label">
+                                Non Smoker
+                              </label>
+                          </div>
+                    </div>
+                    <div class="form-group my-2">
+                        <p>Region</p>
+                        <div class="row m-0">
+                            <div class="form-check mx-auto">
+                                <input class="form-check-input" type="radio" name="region" value=0 required>
+                                <label class="form-check-label">
+                                    southeast
+                                </label>
+                            </div>
+                            <div class="form-check mx-auto">
+                                <input class="form-check-input" type="radio" name="region" value=1>
+                                <label class="form-check-label">
+                                    southwest
+                                </label>
+                            </div>
+                            <div class="form-check mx-auto">
+                                <input class="form-check-input" type="radio" name="region" value=2>
+                                <label class="form-check-label">
+                                    northeast
+                                </label>
+                            </div>
+                            <div class="form-check mx-auto">
+                                <input class="form-check-input" type="radio" name="region" value=3>
+                                <label class="form-check-label">
+                                    northwest
+                                </label>
+                            </div>
+                        </div>      
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                </form>
+
+            </div>
+            <div class="col-xl-6 full_height" style="background-color: #EC994B;">
+                <div style="height: 200px;"></div>
+
+                <!-- 
+                <div class="row m-0 d-flex justify-centent-center">
+                    <div class="col-xl-4 my-3">
+                        <h4>Age: {{ age }}</h4>
+                    </div>
+                    <div class="col-xl-4 my-3">
+                        {% if sex == 0 %}
+                            <h4>Sex: Male</h4>
+                        {% elif sex == 1 %}
+                            <h4>Sex: Female</h4>
+                        {% else %}
+                            <h4>Sex: {{ sex }}</h4>
+                        {% endif %}
+                    </div>
+                    <div class="col-xl-4 my-3">
+                        <h4>BMI: {{ bmi }}</h4>
+                    </div>
+                    <div class="col-xl-4 my-3">
+                        <h4>Children: {{ children }}</h4>
+                    </div>
+                    <div class="col-xl-4 my-3">
+                        {% if smoker == 0 %}
+                            <h4>Smoker: Yes</h4>
+                        {% elif smoker == 1 %}
+                            <h4>Smoker: No</h4>
+                        {% else %}
+                            <h4>Smoker: {{ smoker }}</h4>
+                        {% endif %}
+                    </div>
+                    <div class="col-xl-4 my-3">
+                        {% if region == 0 %}
+                            <h4>Region: southeast</h4>
+                        {% elif region == 1 %}
+                            <h4>Region: southwest</h4>
+                        {% elif region == 2 %}
+                            <h4>Region: northeast</h4>
+                        {% elif region == 3 %}
+                            <h4>Region: northwest</h4>
+                        {% else %}
+                            <h4>Region: {{ region }}</h4>
+                        {% endif %}
+                    </div>
+                </div>
+                 -->
+                <h1 class="text-center my-5">The insurance cost is USD: {{ result }}</h1>
+            </div>
+        </div>
+    </div>
+
+    
+  </body>
+
+</html>
+
+<style>
+    body{
+        color: white;
+    }
+    .full_height{
+        height: 720px;
+    }
+</style>
+
+<script>
+	var ageSlider = document.getElementById("ageRange");
+	var ageOutput = document.getElementById("ageVal");
+	ageOutput.innerHTML = ageSlider.value;
+	ageSlider.oninput = function() {
+        ageOutput.innerHTML = this.value;
+	}
+
+
+    var bmiSlider = document.getElementById("bmiRange");
+	var bmiOutput = document.getElementById("bmiVal");
+	bmiOutput.innerHTML = bmiSlider.value;
+	bmiSlider.oninput = function() {
+        bmiOutput.innerHTML = this.value;
+	}
+
+    
+    var childrenSlider = document.getElementById("childrenRange");
+	var childrenOutput = document.getElementById("childrenVal");
+	childrenOutput.innerHTML = childrenSlider.value;
+	childrenSlider.oninput = function() {
+        childrenOutput.innerHTML = this.value;
+	}
+</script>
+
+
+
+
+
+
+
+
